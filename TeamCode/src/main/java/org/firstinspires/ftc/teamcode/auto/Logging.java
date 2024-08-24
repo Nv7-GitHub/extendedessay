@@ -1,10 +1,15 @@
 package org.firstinspires.ftc.teamcode.auto;
+import android.util.Log;
+
+import com.acmerobotics.dashboard.config.Config;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+@Config
 public class Logging {
-    final String PATH = "a.csv";
+    public static String PATH = "/storage/self/primary/FIRST/data.csv";
     PrintWriter pw;
 
     public Logging(String[] headers) throws FileNotFoundException {
@@ -17,5 +22,10 @@ public class Logging {
         pw.println(Arrays.stream(values)
                 .mapToObj(Double::toString)
                 .collect(Collectors.joining(",")));
+        pw.flush();
+    }
+
+    public void Close() {
+        pw.close();
     }
 }

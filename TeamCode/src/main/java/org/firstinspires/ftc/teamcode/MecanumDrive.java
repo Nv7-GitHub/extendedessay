@@ -40,6 +40,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.messages.DriveCommandMessage;
 import org.firstinspires.ftc.teamcode.messages.MecanumCommandMessage;
@@ -112,7 +113,8 @@ public final class MecanumDrive {
 
     public final LazyImu lazyImu;
 
-    public final Localizer localizer;
+    //public final Localizer localizer;
+    public final TwoDeadWheelLocalizer localizer;
     public Pose2d pose;
 
     private final LinkedList<Pose2d> poseHistory = new LinkedList<>();
@@ -256,6 +258,10 @@ public final class MecanumDrive {
         leftBack.setPower(wheelVels.leftBack.get(0) / maxPowerMag);
         rightBack.setPower(wheelVels.rightBack.get(0) / maxPowerMag);
         rightFront.setPower(wheelVels.rightFront.get(0) / maxPowerMag);
+    }
+
+    public double getDriveCurrent() {
+        return leftFront.getCurrent(CurrentUnit.AMPS) + leftBack.getCurrent(CurrentUnit.AMPS) + rightFront.getCurrent(CurrentUnit.AMPS) + rightBack.getCurrent(CurrentUnit.AMPS);
     }
 
     public final class FollowTrajectoryAction implements Action {

@@ -8,12 +8,14 @@ import com.acmerobotics.roadrunner.PoseVelocity2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
-@Autonomous(name = "AccelCurve")
+//@Autonomous(name = "AccelCurve")
+@Disabled
 @Config
 public class InitialTest extends LinearOpMode {
     MecanumDrive drive;
