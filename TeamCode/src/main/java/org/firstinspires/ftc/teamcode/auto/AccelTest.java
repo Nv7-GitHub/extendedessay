@@ -20,9 +20,10 @@ public class AccelTest extends LinearOpMode {
     MecanumDrive drive;
     Logging log;
     DcMotor enc;
-    public static double SPEED_INITIAL = 1.5; // Volts
-    public static double[] TEST_SPEED = {1, 1.2, 1.4, 1.6, 1.8}; // Volts
+    public static double SPEED_INITIAL = 2; // Volts
+    public static double[] TEST_SPEED = {2, 2.2, 2.4, 2.6, 2.8}; // Volts
     public static int SAMPLES = 3;
+    public static String ENCODER_PORT = "leftFront"; // Left rear for parallel, left front for perpendicular
 
     double getBatteryVoltage() {
         double result = Double.POSITIVE_INFINITY;
@@ -37,7 +38,8 @@ public class AccelTest extends LinearOpMode {
 
     double dir = 0;
     public void setDrivePower(double voltage) {
-        drive.setDrivePowers(new PoseVelocity2d(new Vector2d(voltage/getBatteryVoltage()*dir, 0), 0));
+        //drive.setDrivePowers(new PoseVelocity2d(new Vector2d(voltage/getBatteryVoltage()*dir, 0), 0));
+        drive.setDrivePowers(new PoseVelocity2d(new Vector2d(0, voltage/getBatteryVoltage()*dir), 0));
     }
 
     public void testSpeed(double increase) {
@@ -78,7 +80,7 @@ public class AccelTest extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-        enc = hardwareMap.get(DcMotor.class, "leftRear");
+        enc = hardwareMap.get(DcMotor.class, ENCODER_PORT);
 
         // Actually run the test
         for (double testSpeed : TEST_SPEED) {

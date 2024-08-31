@@ -76,7 +76,7 @@ public class BasicCurveTest extends LinearOpMode {
         start = System.currentTimeMillis();
         for (int i = 1; i <= 3; i++) {
             drive.setDrivePowers(new PoseVelocity2d(new Vector2d(SPEED_INITIAL/getBatteryVoltage(), 0), 0));
-            while (System.currentTimeMillis() - start < 1000*i + 200*(i-1)) {
+            while (System.currentTimeMillis() - start < 1000*i + 400*(i-1)) {
                 double dt = (System.nanoTime() - prevT)/1000000000.0;
                 double vel = (enc.getCurrentPosition() - prevPos)/dt;
                 double accel = (vel - prevVel)/dt;
@@ -89,7 +89,7 @@ public class BasicCurveTest extends LinearOpMode {
 
             // SPEED_FINAL
             drive.setDrivePowers(new PoseVelocity2d(new Vector2d(SPEED_FINAL/getBatteryVoltage(), 0), 0));
-            while (System.currentTimeMillis() - start < 1200*i) {
+            while (System.currentTimeMillis() - start < 1400*i) {
                 double dt = (System.nanoTime() - prevT)/1000000000.0;
                 double vel = (enc.getCurrentPosition() - prevPos)/dt;
                 double accel = (vel - prevVel)/dt;
